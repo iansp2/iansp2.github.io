@@ -1,0 +1,23 @@
+/* styling the recipes page */
+body,html {
+    font-family: "PT Sans", sans-serif;
+    font-size: 20px;
+    background-color: antiquewhite;
+}
+article {
+    margin-left: 1rem;
+}
+#main {
+    text-align: center;
+    width: 20rem;
+    }
+nav {width: 20rem;}
+nav>ul{margin-left: 2rem;}
+#top {
+    background-color: coral;
+    height: 8rem;
+    }
+img {
+    width: 5rem;
+    margin-left: 1rem;
+}

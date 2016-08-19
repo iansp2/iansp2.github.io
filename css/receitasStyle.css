@@ -25,3 +25,4 @@ img {
     padding: 0.1rem;
     border: 0.1rem solid orange;
 }
+.fancybox-inner{overflow: hidden !important;}

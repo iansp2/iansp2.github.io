@@ -53,6 +53,73 @@ hr {
 
 /* Body */
 
+/* About me */
+
+#about-me {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1.5rem;
+  font-size: 1.2rem;
+}
+
+#about-me ul {
+  list-style-type: disc;
+  margin: 1rem;
+}
+
+/* Resume */
+
+.cv {
+  width: 40%;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 1rem auto;
+}
+
+@media only screen and (max-width: 700px) {
+  .cv {
+    width: 80%;
+  }
+}
+
+#resume {
+  border: 0.2rem solid orange;
+}
+
+/* Skills */
+
+#skills {
+  border: 0.2rem solid pink;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  justify-content: center;
+  align-items: center;
+}
+
+.badge-wrapper {
+  width: 150px; 
+  height: 50px;
+  background-color: white; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.badge-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Keeps the aspect ratio while resizing */
+}
+
+.badge-wrapper:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
 h1 {
   width: 17rem;
   margin: 0 auto;
@@ -61,7 +128,7 @@ h1 {
   color: black;
 }
 
-img {
+#gif {
   display: block;
   margin: 2rem auto;
 }

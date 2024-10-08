@@ -58,8 +58,16 @@ hr {
 #about-me {
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch; /* Ensure both sections stretch to match the height */
   margin: 1.5rem;
   font-size: 1.2rem;
+}
+
+.left, .right {
+  width: 40%;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
 }
 
 #about-me ul {
@@ -70,7 +78,7 @@ hr {
 /* Resume */
 
 .cv {
-  width: 40%;
+  flex-grow: 1; /* Makes both sections grow equally */
   border-radius: 1rem;
   padding: 2rem;
   margin: 1rem auto;
@@ -84,6 +92,13 @@ hr {
 
 #resume {
   border: 0.2rem solid orange;
+}
+
+.badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 1rem;
 }
 
 /* Skills */
@@ -113,11 +128,11 @@ hr {
 .badge-wrapper img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain; /* Keeps the aspect ratio while resizing */
+  object-fit: contain;
 }
 
 .badge-wrapper:hover {
-  transform: scale(1.1); /* Slight zoom effect on hover */
+  transform: scale(1.1);
 }
 
 h1 {

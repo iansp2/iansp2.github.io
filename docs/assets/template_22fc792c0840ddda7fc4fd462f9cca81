@@ -5,11 +5,15 @@ tags:
   - Apache
   - CVE-2024-38475
   - mimikatz
+
+icon: simple/gnometerminal
 ---
+
 
 # Box name
 
 !!! info "Box details"  
+    box_url  
     **Difficulty:** TBD  
     **OS:** TBD
 

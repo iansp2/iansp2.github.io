@@ -72,6 +72,7 @@ site_url = "https://iansp2.github.io/"
 # ----------------------------------------------------------------------------
 [project.theme]
 
+
 # change this to "classic" to use the traditional Material for MkDocs look.
 #variant = "classic"
 
@@ -174,7 +175,7 @@ features = [
     # This feature turns on navigation elements in the footer that allow the
     # user to navigate to a next or previous page.
     # https://zensical.org/docs/setup/footer/#navigation
-    "navigation.footer",
+    # "navigation.footer",
 
     # When section index pages are enabled, documents can be directly attached
     # to sections, which is particularly useful for providing overview pages.
@@ -288,14 +289,16 @@ logo = "assets/logo.svg"
 # - https://zensical.org/docs/setup/colors/
 # ----------------------------------------------------------------------------
 [[project.theme.palette]]
-scheme = "default"
-toggle.icon = "lucide/sun"
-toggle.name = "Switch to dark mode"
-
-[[project.theme.palette]]
+accent = "green"
 scheme = "slate"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+accent = "green"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
 
 # ----------------------------------------------------------------------------
 # The "extra" section contains miscellaneous settings.

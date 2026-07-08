@@ -1,115 +1,42 @@
 ---
-icon: simple/markdown
+tags:
+  - HTB
+  - TJNull
+  - OSCP
+  - Windows
+  - MSSQL
+  - dMSA
+  - badSuccessor
+  - PBKDF2
+
+icon: simple/gnometerminal
 ---
 
-# Markdown in 5min
+# Eighteen
 
-![](../assets/pic.jpg)
-![](../assets/pic.gif)
-![](../assets/pic.svg)
+!!! info "Box details"  
+    https://app.hackthebox.com/machines/Eighteen  
+    **Difficulty:** Easy (but honestly, Medium)  
+    **OS:** Windows
 
-## Headers
+> ippsec video: [youtube](https://www.youtube.com/watch?v=C9IYXphO7CI)  
+> 0xdf blog: [0xdf.gitlab.io](https://0xdf.gitlab.io/2026/04/11/htb-eighteen.html)
 
-```
-# H1 Header
-## H2 Header
-### H3 Header
-#### H4 Header
-##### H5 Header
-###### H6 Header
-```
+## Recon
 
-## Text formatting
-
-```
-**bold text**
-*italic text*
-***bold and italic***
-~~strikethrough~~
-`inline code`
+``` bash
+$ ls
+stuff here
 ```
 
-## Links and images
 
-```
-[Link text](https://example.com)
-[Link with title](https://example.com "Hover title")
-![Alt text](image.jpg)
-![Image with title](image.jpg "Image title")
-```
+## Enumeration
 
-## Lists
+## Foothold
 
-```
-Unordered:
+## Privilege Escalation
 
-- Item 1
-- Item 2
-  - Nested item
+## Root
 
-Ordered:
+## Remediation notes
 
-1. First item
-2. Second item
-3. Third item
-```
-
-## Blockquotes
-
-```
-> This is a blockquote
-> Multiple lines
->> Nested quote
-```
-
-## Code blocks
-
-````
-```javascript
-function hello() {
-  console.log("Hello, world!");
-}
-```
-````
-
-## Tables
-
-```
-| Header 1 | Header 2 | Header 3 |
-|----------|----------|----------|
-| Row 1    | Data     | Data     |
-| Row 2    | Data     | Data     |
-```
-
-## Horizontal rule
-
-```
----
-or
-***
-or
-___
-```
-
-## Task lists
-
-```
-- [x] Completed task
-- [ ] Incomplete task
-- [ ] Another task
-```
-
-## Escaping characters
-
-```
-Use backslash to escape: \* \_ \# \`
-```
-
-## Line breaks
-
-```
-End a line with two spaces  
-to create a line break.
-
-Or use a blank line for a new paragraph.
-```

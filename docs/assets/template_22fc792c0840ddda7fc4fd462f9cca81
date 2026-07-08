@@ -1,0 +1,36 @@
+---
+tags:
+  - HTB
+  - Linux
+  - Apache
+  - CVE-2024-38475
+  - mimikatz
+---
+
+# Box name
+
+!!! info "Box details"  
+    **Difficulty:** TBD  
+    **OS:** TBD
+
+> ippsec video: [youtube.com](https://zensical.org/docs/)  
+> 0xdf blog: [0xdf.gitlab.io](https://0xdf.gitlab.io/)
+
+## Recon
+
+``` bash
+$ ls
+stuff here
+```
+
+
+## Enumeration
+
+## Foothold
+
+## Privilege Escalation
+
+## Root
+
+## Remediation notes
+

@@ -54,6 +54,7 @@ nav = [
     ] },
   ] },
   { "HTB boxes" = [
+    { "browsed" = "1. HTB boxes/browsed.md" },
     { "eighteen" = "1. HTB boxes/eighteen.md" },
   ] },
   { "PG boxes" = [

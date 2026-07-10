@@ -50,6 +50,7 @@ nav = [
   "index.md",
   { "Daily Brief" = [
     { "2026-07" = [
+      { "10" = "0. Daily Brief/2026-07-10.md" },
       { "09" = "0. Daily Brief/2026-07-09.md" },
       { "08" = "0. Daily Brief/2026-07-08.md" },
     ] },

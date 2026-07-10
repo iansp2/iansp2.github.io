@@ -13,3 +13,13 @@ As with most cheatsheets here, it is not meant to be exhaustive. It's just thing
 # Copying from vim to somewhere else can be a pain. This solves it. Enter visual mode and then hit the following sequence.
 # Note that + here means literally typing it, as opposed to indicating the combination between two keys
 "+y
+
+# Enter hex mode to edit specific bytes in a binary (e.g., a header)
+:%!xxd
+
+# Exit hex mode
+:%!xxd -r
+
+# Sort selection alphabetically (e.g., python imports)
+:sort
+```

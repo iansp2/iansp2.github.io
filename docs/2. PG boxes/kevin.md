@@ -51,3 +51,9 @@ All the exploits seemed clearly made for this particular box, and yet I could on
 ## Remediation notes
 
 Don't use software with vulnerabilities from almost 20 years ago, I guess?
+
+## After reading briefing
+
+Two things I missed:
+- Default creds would've given me access to enumerate version  
+- There was a msf console exploit for this

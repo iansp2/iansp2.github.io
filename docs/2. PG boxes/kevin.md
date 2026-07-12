@@ -2,6 +2,8 @@
 tags:
   - Proving Grounds
   - Windows
+  - HP Power Manager
+  - Buffer Overflow
 
 icon: simple/gnometerminal
 ---

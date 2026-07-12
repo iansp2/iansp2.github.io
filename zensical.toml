@@ -61,6 +61,7 @@ nav = [
     { "eighteen" = "1. HTB boxes/eighteen.md" },
   ] },
   { "PG boxes" = [
+    { "access" = "2. PG boxes/access.md" },
     { "kevin" = "2. PG boxes/kevin.md" },
   ] },
   { "Cheatsheets" = [

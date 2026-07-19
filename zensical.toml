@@ -50,6 +50,7 @@ nav = [
   "index.md",
   { "Daily Brief" = [
     { "2026-07" = [
+      { "19" = "0. Daily Brief/2026-07-19.md" },
       { "18" = "0. Daily Brief/2026-07-18.md" },
       { "17" = "0. Daily Brief/2026-07-17.md" },
       { "16" = "0. Daily Brief/2026-07-16.md" },
@@ -70,6 +71,7 @@ nav = [
   ] },
   { "PG boxes" = [
     { "access" = "2. PG boxes/access.md" },
+    { "algernon" = "2. PG boxes/algernon.md" },
     { "kevin" = "2. PG boxes/kevin.md" },
   ] },
   { "Cheatsheets" = [
